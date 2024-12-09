@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+################################
+#
+#   store command snippets when memory fails
+#
+#
+################################
+
+DBFILE="$HOME/.mem"
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+GREEN='\033[0;32m'
+
+if [ ! -f "$DBFILE" ]; then
+   echo -e "${GREEN}all your commands are belong to us!" >> "$HOME/.mem"
+   echo "created a new mem base in $HOME/.mem"
+   exit
+fi
+
+usage() {
+    echo "first argument for the command"
+    echo "and second for comment"
+    echo "---"
+    echo "mem add ${BLUE}'curl ipinfo.io/ip' ${GREEN}'get your wan ip'"
+    echo "mem ${BLUE}list ${NC}print all added commands"
+    exit
+}
+
+if [ -z "$1" ]
+  then
+    usage
+fi
+
+case $1 in
+  add)
+    echo -e "${BLUE}#$3" >> "$DBFILE"
+    echo -e "${NC}$2" >> "$DBFILE"
+    echo "---"  >> "$DBFILE"
+    ;;
+  list)
+    cat "$DBFILE"
+    ;;
+esac

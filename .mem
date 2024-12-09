@@ -1,0 +1,22 @@
+---
+[0;34m#replace node with bun
+[0mln -s /home/bender/.bun/bin/bun /usr/bin/node
+---
+[0;34m#download long audiofiles with subtitles
+[0myt-dlp -f 160+139-drc --embed-thumbnail --embed-subs --embed-metadata --sub-langs en --sub-format best --write-subs --write-auto-subs
+---
+[0;34m#To disable compositing
+[0mqdbus org.kde.KWin /Compositor suspend
+---
+[0;34m#To enable compositing
+[0mqdbus org.kde.KWin /Compositor resume
+---
+[0;34m#mount current direcotry for gpuy projects
+[0msudo docker run -it -v /home/bender:/projects --privileged --name pytorch --device=/dev/kfd --device=/dev/dri --group-add video jrcichra/rocm-pytorch-gfx803
+---
+[0;34m#start bash in the gpu container
+[0mdocker start pytorch ; docker exec -it pytorch bash
+---
+[0;34m#mouse click macro
+[0mwhile true; do ydotool click --delay 90 1 > /dev/null 2>&1; done
+---
